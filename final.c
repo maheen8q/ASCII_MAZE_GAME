@@ -77,7 +77,8 @@ void flushInput (){
             
         }
         printf("%s", COLOR_RESET);
-        printf("  ");
+        printf("    ");
+        
         if (i==0) printf("%sStats:%s\n", COLOR_PLAYER, COLOR_RESET);
         else if (i==1) printf(" Steps: %d\n", p->steps);
         else if (i==2) printf(" %sCoins: %d/%d%s\n", COLOR_COIN, p->coins, p->totalCoins, COLOR_RESET);
@@ -135,7 +136,6 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
         printf("         Player %d Maze             \n", playerNum);
         printf("====================================\n");
         printMaze(maze, &player);
-
 
 
         if(maze[player.x][player.y]==EXIT&&player.coins>=player.totalCoins&&player.key){
@@ -310,8 +310,3 @@ if(steps2 == -1){
     printf("====================================\n");
     return 0;
 }
-
-
-
-
-
