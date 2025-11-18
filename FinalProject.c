@@ -16,12 +16,12 @@
 
 //Gave ANSI colours
 #define COLOR_RESET "\033[0m"
-#define COLOR_WALL "\033[1;37m"
-#define COLOR_PLAYER "\033[1;33m"
-#define COLOR_EXIT "\033[1;32m"
+#define COLOR_WALL "\033[1;47m"
+#define COLOR_PLAYER "\033[1;33;44m"
+#define COLOR_EXIT "\033[1;32;41m"
 #define COLOR_KEY "\033[1;36m"
-#define COLOR_COIN "\033[38;5;227m"
-#define COLOR_PATH "\033[0;90m"
+#define COLOR_COIN "\033[1;33m"
+#define COLOR_PATH "\033[0;40m"
 
 //Player Structure
 typedef struct {
@@ -57,7 +57,7 @@ void flushInput (){
         for(int j=0;j<COLUMNS;j++){
             char cell = maze[i][j];
             if (cell == WALL){
-                printf("%s%c%s",COLOR_WALL,cell,COLOR_RESET);
+                printf("%s%c%s",COLOR_WALL,219,COLOR_RESET);
                 }
             else if(cell == PLAYER){
                 printf("%s%c%s",COLOR_PLAYER,cell,COLOR_RESET);
@@ -209,6 +209,7 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
        if(maze[player.x][player.y]==COIN){
         player.coins++;
         printf("%s coin collected! Total: %d/%d%s\n", COLOR_COIN, player.coins, player.totalCoins, COLOR_RESET);
+        printf("\a");
         collected=1;  
        }
 
@@ -253,11 +254,12 @@ int main(){
     printf("====================================\n");
     printf("     ASCII MAZE EXPLORER v3.0      \n");
     printf("====================================\n");
-    printf("Navigate the Player %s%c%s with W/A/S/D keys\n", COLOR_PLAYER, PLAYER, COLOR_RESET);
     printf("Collect the key %s%c%s to unlock door\n", COLOR_KEY, KEY, COLOR_RESET);
     printf("Gather ALL coins %s%c%s before exit\n", COLOR_COIN, COIN, COLOR_RESET);
     printf("Reach %s%c%s (door) to escape\n", COLOR_EXIT, EXIT, COLOR_RESET);
     printf("Player with FEWEST steps wins!\n");
+    printf("Navigate the Player %s%c%s with W/A/S/D keys\n", COLOR_PLAYER, PLAYER, COLOR_RESET);
+    printf("W for upward\n D for forward\n S for downward\n A for backward\n");
     printf("====================================\n\n");
 
    int steps1=0, steps2=0;
