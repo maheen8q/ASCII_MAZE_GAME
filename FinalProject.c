@@ -127,7 +127,7 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
     int collected=0;
 
     initPlayer(&player,maze);
-    player.coins=0;
+   // player.coins=0;
 
     while (1){
         clearScreen();
@@ -148,14 +148,14 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
         }
         
         printf("\n Move (W/A/S/D) or Q to quit: ");
-        fflush(stdout); //ensure prompt is displayed
+       // fflush(stdout); //ensure prompt is displayed
         
        if(scanf(" %c", &move)!= 1){
         flushInput();
         continue;
        }
 
-       flushInput();
+       //flushInput();
        
        if(move=='q'||move=='Q'){
         printf("\nplayer %d quits the game. \n", playerNum);
