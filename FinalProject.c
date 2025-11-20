@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<conio.h>
+#include<windows.h>
 
 //define rows and coloums
 #define ROWS 7
@@ -127,7 +129,7 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
     int collected=0;
 
     initPlayer(&player,maze);
-   // player.coins=0;
+   
 
     while (1){
         clearScreen();
@@ -150,12 +152,8 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
         printf("\n Move (W/A/S/D) or Q to quit: ");
        // fflush(stdout); //ensure prompt is displayed
         
-       if(scanf(" %c", &move)!= 1){
-        flushInput();
-        continue;
-       }
-
-       //flushInput();
+       move=(char)_getch();
+    
        
        if(move=='q'||move=='Q'){
         printf("\nplayer %d quits the game. \n", playerNum);
@@ -175,20 +173,20 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
        newY++;
        else {
         printf("Invalid move! Use W/A/S/D\n");
-        getchar();
-        continue;
+         Sleep(1000);
+         continue;
        }
 
        if(maze[newX][newY]==WALL){
         printf("Can't walk through the walls!\n");
-        getchar();
-        continue;
+         Sleep(1000);
+         continue;
        }
 
        if(maze[newX][newY]==EXIT&& !player.key){
         printf("\n%sThe door is locked! You need the key!%s\n",COLOR_KEY,COLOR_RESET);
         printf("\nPress Enter to continue...");
-        getchar();
+         getchar();
         continue;}
     
 
@@ -207,6 +205,7 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
         player.key=1;
         printf("%sKey collected!%s\n",COLOR_KEY,COLOR_RESET);
         collected =1;
+        maze[player.x][player.y] = PATH;
        }
 
        if(maze[player.x][player.y]==COIN){
@@ -214,6 +213,7 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
         printf("%s coin collected! Total: %d/%d%s\n", COLOR_COIN, player.coins, player.totalCoins, COLOR_RESET);
         printf("\a");
         collected=1;  
+          maze[player.x][player.y] = PATH;
        }
 
        //update maze with player position
@@ -224,13 +224,13 @@ int playMaze(char maze[ROWS][COLUMNS],int playerNum){
        if(collected){
         printf("\nPress Enter to continue");
         getchar();
+      
        }
-
+       
     }
-    
     return player.steps;
-    }
 
+}
 
 int main(){
 
